@@ -7,8 +7,8 @@
 
 # Configuration Variables
 SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
-FUJI_PATH="$SCRIPT_DIR/TOOLS/FS_Acquisition/Fuji/FujiApp.dmg"
 UAC_PATH="$SCRIPT_DIR/TOOLS/Vol_Acquisition/uac/uac"
+FUJI_PATH="$SCRIPT_DIR/TOOLS/FS_Acquisition/Fuji/FujiApp.dmg"
 OUTPUT_DIR="$SCRIPT_DIR/$(hostname)"
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 
