@@ -3,6 +3,19 @@ Removed:
 CyLR (win, mac, linux) and updated scripts
 Added:
 UAC (Unix-like Artifacts Collector) for mac and linux scripts
+Updated:
+win_IR.bat added [D for Default] mode to auto-answer all acquisition prompts
+win_IR.bat replaced repetitive diskpart and BitLocker per-drive blocks with loops
+win_IR.bat fixed Invoke-RestMethod syntax for external IP; commented out netstat -f
+win_IR.bat fixed encoding artifact in admin check comment
+lin_IR.sh fixed $timestamp -> $TIMESTAMP variable case mismatch throughout
+lin_IR.sh added mkdir -p for output directory; fixed acquire_uac closing brace
+lin_IR.sh fixed log_system_info: replaced invalid Minidump line with ip addr / uname -a
+mac_IR.sh fixed SCRIPT_DIR to use BASH_SOURCE[0] (macOS-compatible; readlink -f unavailable)
+mac_IR.sh fixed $timestamp -> $TIMESTAMP variable case mismatch throughout
+mac_IR.sh added mkdir -p for output directory; fixed acquire_uac and acquire_fuji closing braces
+mac_IR.sh fixed log_system_info: replaced Linux commands with macOS equivalents
+mac_IR.sh fixed Fuji path check from -x to -f
 
 2026-05-11
 Removed:

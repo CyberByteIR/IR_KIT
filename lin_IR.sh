@@ -23,21 +23,23 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
+# Create output directory
+mkdir -p "$OUTPUT_DIR"
 
 # Function / memory acquisition
 acquire_memory() {
 	mkdir -p "$OUTPUT_DIR/avml"
     local avml_output_file="$OUTPUT_DIR/avml/mem.lime"
-    echo "$timestamp: Started Memory acquisition"
-	echo "$timestamp: Started Memory acquisition" >> "$OUTPUT_DIR/log.txt"
+    echo "$TIMESTAMP: Started Memory acquisition"
+	echo "$TIMESTAMP: Started Memory acquisition" >> "$OUTPUT_DIR/log.txt"
     echo "Output file: $avml_output_file"
 
     if ! "$AVML_PATH" --compress "$avml_output_file"; then
         echo "Error: Memory acquisition failed"
         return 1
     fi
-    echo "$timestamp: Completed Memory acquisition"
-	echo "$timestamp: Completed Memory acquisition" >> "$OUTPUT_DIR/log.txt"
+    echo "$TIMESTAMP: Completed Memory acquisition"
+	echo "$TIMESTAMP: Completed Memory acquisition" >> "$OUTPUT_DIR/log.txt"
 
 }
 
@@ -45,8 +47,8 @@ acquire_memory() {
 log_system_info() {
     local log_file="$OUTPUT_DIR/system_info.txt"
 
-    echo "$timestamp: Started System Information acquisition"
-	echo "$timestamp: Started System Information acquisition" >> "$OUTPUT_DIR/log.txt"	
+    echo "$TIMESTAMP: Started System Information acquisition"
+	echo "$TIMESTAMP: Started System Information acquisition" >> "$OUTPUT_DIR/log.txt"	
 
     {
         echo "Hostname: $(hostname)"
@@ -57,18 +59,21 @@ log_system_info() {
         free -h
         echo "Disk Space:"
         df -h
-		echo "Minidump info: $(ifconfig, uname –a, system_profiler –detailLevel mini)"
+		echo "Network interfaces:"
+		ip addr
+		echo "System info:"
+		uname -a
     } > "$log_file"
 
-   echo "$timestamp: Completed System Information acquisition"
-	echo "$timestamp: Completed System Information acquisition" >> "$OUTPUT_DIR/log.txt"
+   echo "$TIMESTAMP: Completed System Information acquisition"
+	echo "$TIMESTAMP: Completed System Information acquisition" >> "$OUTPUT_DIR/log.txt"
 }
 
 # Function / live response data
 acquire_uac() {
 	mkdir -p "$OUTPUT_DIR/uac"
-    echo "$timestamp: Started UAC acquisition"
-	echo "$timestamp: Started UAC acquisition" >> "$OUTPUT_DIR/log.txt"
+    echo "$TIMESTAMP: Started UAC acquisition"
+	echo "$TIMESTAMP: Started UAC acquisition" >> "$OUTPUT_DIR/log.txt"
     echo "Output directory: $OUTPUT_DIR/uac"
 
     if ! "$UAC_PATH" -p ir_triage "$OUTPUT_DIR/uac"; then
@@ -76,9 +81,9 @@ acquire_uac() {
         return 1
     fi
 
-    echo "$timestamp: Completed UAC acquisition"
-	echo "$timestamp: Completed UAC acquisition" >> "$OUTPUT_DIR/log.txt"
-	
+    echo "$TIMESTAMP: Completed UAC acquisition"
+	echo "$TIMESTAMP: Completed UAC acquisition" >> "$OUTPUT_DIR/log.txt"
+	}
 # Main execution
 main() {
 
@@ -106,8 +111,8 @@ main() {
 	acquire_uac
 	
 
-echo "$timestamp: Completed Acquisition, review above output for errors"
-echo "$timestamp: Completed Acquisition" >> "$OUTPUT_DIR/log.txt"
+echo "$TIMESTAMP: Completed Acquisition, review above output for errors"
+echo "$TIMESTAMP: Completed Acquisition" >> "$OUTPUT_DIR/log.txt"
 }
 
 # Trap to handle interruptions
