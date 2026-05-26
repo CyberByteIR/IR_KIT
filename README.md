@@ -3,7 +3,7 @@
 **Author:** Jeremy Brice - Cyberbyte Consulting  
 **Contact:** forensics@cyberbyteconsulting.com  
 **Website:** https://cyberbyteconsulting.com  
-**Last Updated:** 2026-04-28  
+**Last Updated:** 2026-05-26  
 **License:** MIT (scripts only - see LICENSE)
 
 ---
@@ -14,9 +14,9 @@ IR_KIT is a portable incident response toolkit designed for rapid deployment dur
 
 ## Supported Platforms
 
-- **Windows** (`win_IR.bat`) - Full-featured collection including memory, volatile data, artifact triage, filesystem imaging, and encryption detection
-- **Linux** (`lin_IR.sh`) - Memory acquisition, system information, artifact collection, and live triage
-- **macOS** (`mac_IR.sh`) - Memory acquisition, system information, artifact collection, and live triage
+- **Windows** (`win_IR.bat`) - Full-featured collection including memory, volatile data, artifact triage, and filesystem imaging
+- **Linux** (`lin_IR.sh`) - Memory acquisition, system information, and artifact collection
+- **macOS** (`mac_IR.sh`) - System information, artifact collection, and filesystem acquisition
 
 ## Directory Structure
 
@@ -25,7 +25,6 @@ IR_KIT/
 ├── win_IR.bat                  # Windows IR collection script
 ├── lin_IR.sh                   # Linux IR collection script
 ├── mac_IR.sh                   # macOS IR collection script
-├── poststander.bat             # PostStander launcher
 ├── terminal.bat                # Portable Windows Terminal launcher
 ├── LICENSE                     # MIT License (scripts only)
 ├── REQUIREMENTS.md             # Third-party tool list with download links
@@ -33,11 +32,11 @@ IR_KIT/
 └── TOOLS/
     ├── Encryption/             # Encrypted Disk Detector (EDD)
     ├── FS_Acquisition/         # FTK Imager (GUI + CLI), Fuji
-    ├── Live_Triage/            # THOR Lite, osTriage
+    ├── Live_Triage/            # osTriage
     ├── Other_Tools/            # CamStudio, Hasher, MouseJiggle,
     │                             NotMyFault, ProcessHacker, Terminal
-    └── Vol_Acquisition/        # AVML, CyberTriage, CyLR, KAPE,
-                                  Magnet RESPONSE, PostStander, WinPmem
+    └── Vol_Acquisition/        # AVML, CyberTriage, KAPE,
+                                  Magnet RESPONSE, UAC, WinPmem
 ```
 
 ## Windows Collection Workflow (win_IR.bat)
@@ -49,9 +48,7 @@ The Windows script provides an interactive, menu-driven collection process:
 3. **CyberTriage** - Automated host-based triage collection
 4. **KAPE** - Targeted artifact collection (KapeTriage + MemoryFiles)
 5. **Magnet RESPONSE** - Volatile data, system files, and ransomware note capture
-6. **CyLR** - Forensic artifact collection with minimal disk impact
-7. **THOR Lite** - Live IOC and YARA-based threat scanning
-8. **FTK Imager CLI** - Logical or physical disk imaging (E01 format)
+6. **FTK Imager CLI** - Logical or physical disk imaging (E01 format)
 
 Each step is optional and can be skipped or the script can be exited at any point.
 
@@ -59,15 +56,13 @@ Each step is optional and can be skipped or the script can be exited at any poin
 
 1. System information collection
 2. Memory acquisition via AVML
-3. Artifact collection via CyLR
-4. Live triage via THOR Lite
+3. Artifact collection via UAC (profile: ir_triage)
 
 ## macOS Collection Workflow (mac_IR.sh)
 
 1. System information collection
-2. Filesystem acquisition via Fuji (GUI — launched manually)
-3. Artifact collection via CyLR
-4. Live triage via THOR Lite
+2. Artifact collection via UAC (profile: ir_triage)
+3. Filesystem acquisition via Fuji (GUI — launched manually)
 
 ## Usage
 
