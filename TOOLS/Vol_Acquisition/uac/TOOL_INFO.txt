@@ -1,0 +1,4 @@
+UAC (Unix-like Artifacts Collector)
+Source: https://github.com/tclahr/uac
+Profile used: ir_triage
+Place uac script and supporting folders (artifacts, bin, config, lib, profiles) here.

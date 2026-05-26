@@ -1,7 +1,7 @@
 :: Windows Incident Response Script
 :: By Jeremy Brice
 :: forensics@cyberbyteconsulting.com
-:: Updated: 2026-05-11
+:: Updated: 2026-05-26
 
 @echo OFF
 
@@ -240,7 +240,7 @@ echo %date%-%time%: Completed Kape acquisition >> "%output_dir%\log.txt"
 :magnetchoice
 set /P c=[32m Run Magnet Collection? [Y/N][E to End]? [0m
 if /I "%c%" EQU "Y" goto :magnet
-if /I "%c%" EQU "N" goto :cylrchoice
+if /I "%c%" EQU "N" goto :ftkchoice
 if /I "%c%" EQU "E" goto :done
 
 :magnet
@@ -251,21 +251,6 @@ start /wait MagnetRESPONSE.exe /accepteula /nodiagnosticdata /unattended /silent
 echo %date%-%time%: Completed Magnet Response acquisition 
 echo %date%-%time%: Completed Magnet Response acquisition >> "%output_dir%\log.txt"
 
-:: Tertiary acquisition of system files
-:cylrchoice
-set /P c=[32m Run CyLR Collection? [Y/N][E to End]? [0m
-if /I "%c%" EQU "Y" goto :cylr
-if /I "%c%" EQU "N" goto :ftkchoice
-if /I "%c%" EQU "E" goto :done
-
-:cylr
-mkdir "%output_dir%\cylr"
-cd /D %~dp0TOOLS\Vol_Acquisition\CyLR
-echo %date%-%time%: Started CyLR acquisition 
-echo %date%-%time%: Started CyLR acquisition >> "%output_dir%\log.txt"
-start /wait CyLR_win.exe -od "%output_dir%\cylr" -l "%output_dir%\cylr\CyLR.log"
-echo %date%-%time%: Completed CyLR acquisition
-echo %date%-%time%: Completed CyLR acquisition >> "%output_dir%\log.txt"
 :: Acquire Logical Image of Drive
 :ftkchoice
 set /P c=[32m Run FTK File System Acquisition? [Y/N][E to End]? [0m

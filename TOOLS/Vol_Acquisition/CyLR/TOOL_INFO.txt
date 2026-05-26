@@ -1,6 +1,0 @@
-CyLR (Live Response Collection Tool)
-Version: Latest
-Vendor: Alan Orlikoski
-Download: https://github.com/orlikoski/CyLR/releases
-License: Apache 2.0
-Description: Cross-platform live response collection tool that collects forensic artifacts from hosts quickly and securely with minimal disk impact. Supports Windows, Linux, and macOS. Can transfer collected data via SFTP.

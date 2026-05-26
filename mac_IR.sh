@@ -3,12 +3,12 @@
 # Mac Incident Response Script
 # By Jeremy Brice
 # forensics@cyberbyteconsulting.com
-# Updated: 2026-05-11
+# Updated: 2026-05-26
 
 # Configuration Variables
 SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
 FUJI_PATH="$SCRIPT_DIR/TOOLS/FS_Acquisition/Fuji/FujiApp.dmg"
-CYLR_PATH="$SCRIPT_DIR/TOOLS/Vol_Acquisition/CyLR/CyLR_mac"
+UAC_PATH="$SCRIPT_DIR/TOOLS/Vol_Acquisition/uac/uac"
 OUTPUT_DIR="$SCRIPT_DIR/$(hostname)"
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 
@@ -41,22 +41,20 @@ echo "$timestamp: Started System Information acquisition"
    echo "$timestamp: Completed System Information acquisition"
 	echo "$timestamp: Completed System Information acquisition" >> "$OUTPUT_DIR/log.txt"
 }
-# CyLR
-acquire_cylr() {
-	mkdir -p "$OUTPUT_DIR/cylr"
-    local cylr_output_file="$OUTPUT_DIR/cylr/cylr_output.zip"
-	local cylr_output_log="$OUTPUT_DIR/cylr/cylr.log"
-    echo "$timestamp: Started CyLR acquisition"
-	echo "$timestamp: Started CyLR acquisition" >> "$OUTPUT_DIR/log.txt"
-    echo "Output file: $cylr_output_file"
+# UAC
+acquire_uac() {
+	mkdir -p "$OUTPUT_DIR/uac"
+    echo "$timestamp: Started UAC acquisition"
+	echo "$timestamp: Started UAC acquisition" >> "$OUTPUT_DIR/log.txt"
+    echo "Output directory: $OUTPUT_DIR/uac"
 
-    if ! "$CYLR_PATH" -od "$cylr_output_file" -l "$cylr_output_log"; then
-        echo "Error: CyLR live response collection failed"
+    if ! "$UAC_PATH" -p ir_triage "$OUTPUT_DIR/uac"; then
+        echo "Error: UAC acquisition failed"
         return 1
     fi
 
-    echo "$timestamp: Completed CyLR Live Response acquisition"
-	echo "$timestamp: Completed CyLR Live Response acquisition" >> "$OUTPUT_DIR/log.txt"
+    echo "$timestamp: Completed UAC acquisition"
+	echo "$timestamp: Completed UAC acquisition" >> "$OUTPUT_DIR/log.txt"
 	
 # Fuji
 acquire_fuji() {
@@ -79,14 +77,14 @@ main() {
     # Log system information
     log_system_info
 	
-	# Validate CyLR path
-    if [[ ! -x "$CYLR_PATH" ]]; then
-        echo "Error: CyLR not found at $CYLR_PATH"
-        echo "Please check the CyLR path and ensure it's executable"
+	# Validate UAC path
+    if [[ ! -x "$UAC_PATH" ]]; then
+        echo "Error: UAC not found at $UAC_PATH"
+        echo "Please check the UAC path and ensure it's executable"
         return 1
     fi
-	# Perform cylr acquisition
-	acquire_cylr
+	# Perform UAC acquisition
+	acquire_uac
 	
 	# Validate Fuji path
     if [[ ! -x "$FUJI_PATH" ]]; then

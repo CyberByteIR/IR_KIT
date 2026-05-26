@@ -3,15 +3,15 @@
 # Linux Incident Response Script
 # By Jeremy Brice
 # forensics@cyberbyteconsulting.com
-# Updated: 2026-05-11
+# Updated: 2026-05-26
 
 # Configuration Variables
 SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
 #echo "Script directory: $SCRIPT_DIR"
 AVML_PATH="$SCRIPT_DIR/TOOLS/Vol_Acquisition/avml/avml"
 #echo "AVML path: $AVML_PATH"
-CYLR_PATH="$SCRIPT_DIR/TOOLS/Vol_Acquisition/CyLR/CyLR_linux"
-#echo "CyLR path: $CYLR_PATH"
+UAC_PATH="$SCRIPT_DIR/TOOLS/Vol_Acquisition/uac/uac"
+#echo "UAC path: $UAC_PATH"
 OUTPUT_DIR="$SCRIPT_DIR/$(hostname)"
 #echo "Output directory: $OUTPUT_DIR"
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
@@ -65,21 +65,19 @@ log_system_info() {
 }
 
 # Function / live response data
-acquire_cylr() {
-	mkdir -p "$OUTPUT_DIR/cylr"
-    local cylr_output_file="$OUTPUT_DIR/cylr/cylr_output.zip"
-	local cylr_output_log="$OUTPUT_DIR/cylr/cylr.log"
-    echo "$timestamp: Started Live Response acquisition"
-	echo "$timestamp: Started Live Response acquisition" >> "$OUTPUT_DIR/log.txt"
-    echo "Output file: $cylr_output_file"
+acquire_uac() {
+	mkdir -p "$OUTPUT_DIR/uac"
+    echo "$timestamp: Started UAC acquisition"
+	echo "$timestamp: Started UAC acquisition" >> "$OUTPUT_DIR/log.txt"
+    echo "Output directory: $OUTPUT_DIR/uac"
 
-    if ! "$CYLR_PATH" -od "$cylr_output_file" -l "$cylr_output_log"; then
-        echo "Error: CyLR live response collection failed"
+    if ! "$UAC_PATH" -p ir_triage "$OUTPUT_DIR/uac"; then
+        echo "Error: UAC acquisition failed"
         return 1
     fi
 
-    echo "$timestamp: Completed Live Response acquisition"
-	echo "$timestamp: Completed Live Response acquisition" >> "$OUTPUT_DIR/log.txt"
+    echo "$timestamp: Completed UAC acquisition"
+	echo "$timestamp: Completed UAC acquisition" >> "$OUTPUT_DIR/log.txt"
 	
 # Main execution
 main() {
@@ -97,15 +95,15 @@ main() {
     # Perform memory acquisition
     acquire_memory
 
-	# Validate CyLR path
-    if [[ ! -x "$CYLR_PATH" ]]; then
-        echo "Error: CyLR not found at $CYLR_PATH"
-        echo "Please check the CyLR path and ensure it's executable"
+	# Validate UAC path
+    if [[ ! -x "$UAC_PATH" ]]; then
+        echo "Error: UAC not found at $UAC_PATH"
+        echo "Please check the UAC path and ensure it's executable"
         return 1
     fi
 
-	# Perform cylr acquisition
-	acquire_cylr
+	# Perform UAC acquisition
+	acquire_uac
 	
 
 echo "$timestamp: Completed Acquisition, review above output for errors"
