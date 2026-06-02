@@ -175,7 +175,8 @@ echo %date%-%time%: Completed Kape acquisition >> "%output_dir%\log.txt"
 :: Secondary acquisition of volatile data
 :magnetchoice
 if "%default_mode%"=="1" (set "c=N") else (
-    set "c="set /P c=[32m Run Magnet Collection? [Y/N][E to End]? [0m
+    set "c="
+	set /P c=[32m Run Magnet Collection? [Y/N][E to End]? [0m
 	)
 if /I "%c%" EQU "Y" goto :magnet
 if /I "%c%" EQU "N" goto :ftkchoice
