@@ -16,10 +16,9 @@ This document lists all third-party tools used by the IR_KIT scripts. These tool
 | Tool | Version | Platform | Download | License |
 |------|---------|----------|----------|---------|
 | KAPE (Kroll Artifact Parser and Extractor) | Latest | Windows | https://www.kroll.com/en/services/cyber-risk/incident-response-litigation-support/kroll-artifact-parser-extractor-kape | Freeware (Registration Required) |
-| CyLR | Latest | Windows, Linux, macOS | https://github.com/orlikoski/CyLR/releases | Apache 2.0 |
 | Magnet RESPONSE | Latest | Windows | https://www.magnetforensics.com/resources/magnet-response/ | Freeware (Registration Required) |
-| CyberTriage Collector | Latest | Windows | https://www.cybertriage.com/download/ | Commercial (Free Lite Version) |
-| PostStander (TFO) | Latest | Windows | Contact TechFusion Ops / Your Agency | Law Enforcement Only |
+| CyberTriage Collector | Latest | Windows | https://www.cybertriage.com/download/ | Commercial (Free Lite Version Available) |
+| UAC (Unix-like Artifacts Collector) | Latest | Linux, macOS | https://github.com/tclahr/uac | Apache 2.0 |
 
 ## Filesystem Acquisition
 
@@ -33,8 +32,7 @@ This document lists all third-party tools used by the IR_KIT scripts. These tool
 
 | Tool | Version | Platform | Download | License |
 |------|---------|----------|----------|---------|
-| THOR Lite | 10.7 | Windows, Linux, macOS | https://www.nextron-systems.com/thor-lite/ | Freeware (License Key Required) |
-| osTriage | 25 | Windows | https://www.intaforensics.com/ostriage/ | Commercial |
+| osTriage | 2.5 | Windows | Requires ICAC Affiliation | ICAC Affiliates Only |
 
 ## Encryption Detection
 
@@ -62,21 +60,18 @@ This document lists all third-party tools used by the IR_KIT scripts. These tool
    - `TOOLS/Vol_Acquisition/winpmem/` - WinPmem
    - `TOOLS/Vol_Acquisition/avml/` - AVML
    - `TOOLS/Vol_Acquisition/KAPE/` - KAPE
-   - `TOOLS/Vol_Acquisition/CyLR/` - CyLR
    - `TOOLS/Vol_Acquisition/Magnet/` - Magnet RESPONSE
    - `TOOLS/Vol_Acquisition/cybertriage/` - CyberTriage Collector
-   - `TOOLS/Vol_Acquisition/PostStander-TFO/` - PostStander
+   - `TOOLS/Vol_Acquisition/uac/` - UAC (uac script + artifacts/, bin/, config/, lib/, profiles/ subdirectories)
    - `TOOLS/FS_Acquisition/FTK Imager_4.7_portable/` - FTK Imager GUI
    - `TOOLS/FS_Acquisition/FTK_Imager-commandline/` - FTK Imager CLI
    - `TOOLS/FS_Acquisition/Fuji/` - Fuji (macOS)
-   - `TOOLS/Live_Triage/thor/thor-win/` - THOR Lite
-   - `TOOLS/Live_Triage/thor/thor-mac/` - THOR Lite
-   - `TOOLS/Live_Triage/thor/thor-linux/` - THOR Lite
    - `TOOLS/Live_Triage/osTriage25/` - osTriage
    - `TOOLS/Encryption/` - EDD
    - `TOOLS/Other_Tools/Terminal/` - Windows Terminal
    - `TOOLS/Other_Tools/Camstudio/` - CamStudio
    - `TOOLS/Other_Tools/Hasher/` - Hasher
+   - `TOOLS/Other_Tools/MouseJiggle.exe` - Mouse Jiggle (place executable directly in Other_Tools/)
    - `TOOLS/Other_Tools/NotMyFault/` - NotMyFault
    - `TOOLS/Other_Tools/ProcessHacker/` - Process Hacker
 

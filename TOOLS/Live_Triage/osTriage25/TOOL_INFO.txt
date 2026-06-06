@@ -1,6 +1,6 @@
 osTriage
-Version: 25
-Vendor: Intaforensics
-Download: https://www.intaforensics.com/ostriage/
-License: Commercial
-Description: Live forensic triage tool for collecting and analyzing volatile and non-volatile data from Windows systems during incident response.
+Version: 2.5
+Vendor: 
+Download: Requires ICAC Affiliation
+License: 
+Description: 
