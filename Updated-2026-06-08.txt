@@ -1,3 +1,7 @@
+2026-06-08
+Removed:
+KAPE Modules folder — Modules are not bundled with the toolkit release; sync via Get-KAPEUpdate.ps1 or gkape.exe after deployment
+
 2026-06-02
 Fixed:
 win_IR.bat fixed missing newline in Magnet Collection default mode prompt causing set and set /P to concatenate on one line

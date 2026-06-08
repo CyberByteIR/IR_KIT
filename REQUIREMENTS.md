@@ -16,6 +16,9 @@ This document lists all third-party tools used by the IR_KIT scripts. These tool
 | Tool | Version | Platform | Download | License |
 |------|---------|----------|----------|---------|
 | KAPE (Kroll Artifact Parser and Extractor) | Latest | Windows | https://www.kroll.com/en/services/cyber-risk/incident-response-litigation-support/kroll-artifact-parser-extractor-kape | Freeware (Registration Required) |
+
+> **Note:** KAPE Modules are not bundled with this toolkit. After placing KAPE in `TOOLS/Vol_Acquisition/KAPE/`, sync Modules by running `Get-KAPEUpdate.ps1` or using `gkape.exe`.
+
 | Magnet RESPONSE | Latest | Windows | https://www.magnetforensics.com/resources/magnet-response/ | Freeware (Registration Required) |
 | CyberTriage Collector | Latest | Windows | https://www.cybertriage.com/download/ | Commercial (Free Lite Version Available) |
 | UAC (Unix-like Artifacts Collector) | Latest | Linux, macOS | https://github.com/tclahr/uac | Apache 2.0 |

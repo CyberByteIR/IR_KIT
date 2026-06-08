@@ -4,3 +4,4 @@ Vendor: Kroll
 Download: https://www.kroll.com/en/services/cyber-risk/incident-response-litigation-support/kroll-artifact-parser-extractor-kape
 License: Freeware (Registration Required)
 Description: Triage tool for targeted collection and processing of forensic artifacts. Uses modular Targets and Modules for flexible artifact collection from Windows systems. Includes both CLI (kape.exe) and GUI (gkape.exe) interfaces.
+Note: The Modules folder is not included in this toolkit release. Sync Modules using Get-KAPEUpdate.ps1 or via gkape.exe after deployment.
