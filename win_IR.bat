@@ -102,7 +102,24 @@ echo %date%-%time%: Started Volatile Data acquisition >> "%output_dir%\log.txt"
  net user >> "%output_dir%\vol_data\users.txt"
  net localgroup administrators >> "%output_dir%\vol_data\users_admins.txt"
  powershell -Command "Get-WmiObject Win32_UserAccount -filter LocalAccount=True" >> "%output_dir%\vol_data\users_all.txt"
-
+ 
+ echo Collecting clipboard history
+ 
+reg query "HKCU\Software\Microsoft\Clipboard" >> "%output_dir%\vol_data\clipboard_settings.txt"
+tasklist /svc /fi "imagename eq svchost.exe" | findstr /i cbdhsvc >> "%output_dir%\vol_data\clipboard_cbdhsvc_pid.txt"
+for /D %%U in ("%SystemDrive%\Users\*") do (
+     if exist "%%~fU\AppData\Local\Microsoft\Windows\Clipboard" (
+         robocopy "%%~fU\AppData\Local\Microsoft\Windows\Clipboard" "%output_dir%\vol_data\clipboard_pinned\%%~nxU" /E /COPY:DAT /R:0 /W:0 /NFL /NDL /NJH /NJS >nul 2>&1
+     )
+ )
+powershell -NoProfile -ExecutionPolicy Bypass -STA -File "%~dp0TOOLS\Vol_Acquisition\Get-ClipHistory.ps1" -OutputDir "%output_dir%\vol_data\" >> "%output_dir%\vol_data\clipboard_collection_log.txt"
+ if errorlevel 1 (
+     echo   [33m Clipboard history NOT retrieved - see clipboard_collection_log.txt [0m
+     echo %date%-%time%: Clipboard history retrieval FAILED - see vol_data\clipboard_collection_log.txt >> "%output_dir%\log.txt"
+ ) else (
+     echo %date%-%time%: Clipboard history retrieved >> "%output_dir%\log.txt"
+ )
+ 
  echo Collecting registry information
  reg query HKLM\Software\Microsoft\Windows\CurrentVersion\Run >> "%output_dir%\vol_data\reg_autoruns.txt"
  reg query HKLM\System\CurrentControlSet\Services >> "%output_dir%\vol_data\reg_services.txt"
