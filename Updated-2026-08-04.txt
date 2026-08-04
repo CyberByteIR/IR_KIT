@@ -1,3 +1,10 @@
+2026-08-04
+Added:
+win_clip_history.bat — user-context clipboard history collector; verifies executing account, warns on elevation, collects per-user pinned items and live WinRT history
+TOOLS/Vol_Acquisition/Get-ClipHistory.ps1 — PowerShell 5.1 WinRT collector exporting clipboard history to clipboard_history.csv with SHA256 and context logging
+Updated:
+win_IR.bat added clipboard history collection to Volatile Data acquisition — clipboard feature state, cbdhsvc PID, per-user pinned Clipboard directories, and Get-ClipHistory.ps1 invocation with success/failure logging
+
 2026-06-08
 Removed:
 KAPE Modules folder — Modules are not bundled with the toolkit release; sync via Get-KAPEUpdate.ps1 or gkape.exe after deployment
