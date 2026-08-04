@@ -4,7 +4,7 @@
 **Contact:** forensics@cyberbyteconsulting.com  
 **Website:** https://cyberbyteconsulting.com  
 **Last Updated:** 2026-08-04  
-**Version:** v2.4.0  
+**Version:** v2.4.1  
 **License:** MIT (scripts only - see LICENSE)
 
 ---

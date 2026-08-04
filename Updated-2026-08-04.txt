@@ -4,6 +4,7 @@ win_clip_history.bat — user-context clipboard history collector; verifies exec
 TOOLS/Vol_Acquisition/Get-ClipHistory.ps1 — PowerShell 5.1 WinRT collector exporting clipboard history to clipboard_history.csv with SHA256 and context logging
 Updated:
 win_IR.bat added clipboard history collection to Volatile Data acquisition — clipboard feature state, cbdhsvc PID, per-user pinned Clipboard directories, and Get-ClipHistory.ps1 invocation with success/failure logging
+README.md documented clipboard history collection — new Clipboard History section, platform list, directory structure, and usage; header version and date updated
 
 2026-06-08
 Removed:
