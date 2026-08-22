@@ -35,7 +35,7 @@ This document lists all third-party tools used by the IR_KIT scripts. These tool
 
 | Tool | Version | Platform | Download | License |
 |------|---------|----------|----------|---------|
-| osTriage | 2.5 | Windows | Requires ICAC Affiliation | ICAC Affiliates Only |
+| osTriage | 2.5.2.3 | Windows | Requires ICAC Affiliation | ICAC Affiliates Only |
 
 ## Encryption Detection
 

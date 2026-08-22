@@ -3,8 +3,8 @@
 **Author:** Jeremy Brice - Cyberbyte Consulting  
 **Contact:** forensics@cyberbyteconsulting.com  
 **Website:** https://cyberbyteconsulting.com  
-**Last Updated:** 2026-08-04  
-**Version:** v2.4.1  
+**Last Updated:** 2026-08-20  
+**Version:** v2.4.2  
 **License:** MIT (scripts only - see LICENSE)
 
 ---
