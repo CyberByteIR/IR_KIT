@@ -1,6 +1,6 @@
 :: Windows Incident Response Script
 :: By Jeremy Brice
-:: forensics@cyberbyteconsulting.com
+:: forensics@cyberbyteir.com
 :: Updated: 2026-09-09
 
 @echo OFF

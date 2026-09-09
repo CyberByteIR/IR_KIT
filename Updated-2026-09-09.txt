@@ -1,3 +1,8 @@
+2026-09-09 (v2.5.1)
+Updated:
+Rebranded contact information across the toolkit: author "Jeremy Brice - CyberByte", contact forensics@cyberbyteir.com, website https://CyberByteIR.com
+README.md, LICENSE, win_IR.bat, win_clip_history.bat, lin_IR.sh, mac_IR.sh header/contact blocks updated
+
 2026-09-09
 Removed:
 Magnet Response

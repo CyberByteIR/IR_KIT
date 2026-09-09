@@ -2,7 +2,7 @@
 
 # Mac Incident Response Script
 # By Jeremy Brice
-# forensics@cyberbyteconsulting.com
+# forensics@cyberbyteir.com
 # Updated: 2026-05-26
 
 # Configuration Variables
