@@ -1,3 +1,13 @@
+2026-09-09
+Removed:
+Magnet Response
+win_IR.bat removed Magnet Collection prompt and acquisition block; KAPE prompt now falls through to FTK
+TOOLS/Vol_Acquisition/Magnet/ removed from toolkit
+Updated:
+win_IR.bat Default mode prompt now lists the steps it runs (Memory, Volatile, CyberTriage, Kape)
+README.md removed Magnet RESPONSE from directory structure and Windows collection workflow; header version and date updated
+REQUIREMENTS.md removed Magnet RESPONSE tool row and installation path
+
 2026-08-20
 Updated: 
 OSTriage to 2.5.2.3

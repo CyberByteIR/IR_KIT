@@ -1,7 +1,7 @@
 :: Windows Incident Response Script
 :: By Jeremy Brice
 :: forensics@cyberbyteconsulting.com
-:: Updated: 2026-05-26
+:: Updated: 2026-09-09
 
 @echo OFF
 
@@ -34,7 +34,7 @@ echo Hostname: %COMPUTERNAME%
 echo Hostname: %COMPUTERNAME% >> "%output_dir%\log.txt"
 
 :memorychoice
-set /P c=[32m Acquire Memory? [Y/N][D for Default] [E to End]? [0m
+set /P c=[32m Acquire Memory? [Y/N][D for Default (Memory, Volatile, CyberTriage, Kape)] [E to End]? [0m
 if /I "%c%" EQU "Y" goto :memory
 if /I "%c%" EQU "N" goto :voldatachoice
 if /I "%c%" EQU "D" (set "default_mode=1" & goto :memory)
@@ -178,7 +178,7 @@ if "%default_mode%"=="1" (set "c=Y") else (
 set /P c=[32m Run KAPE Collection? [Y/N][E to End]? [0m
 )
 if /I "%c%" EQU "Y" goto :kape
-if /I "%c%" EQU "N" goto :magnetchoice
+if /I "%c%" EQU "N" goto :ftkchoice
 if /I "%c%" EQU "E" goto :done
 
 :kape
@@ -188,24 +188,6 @@ echo %date%-%time%: Started Kape acquisition >> "%output_dir%\log.txt"
 start /wait kape.exe --tsource C: --tdest "%output_dir%\kape" --target KapeTriage,MemoryFiles --vhd collection --zv false
 echo %date%-%time%: Completed Kape acquisition 
 echo %date%-%time%: Completed Kape acquisition >> "%output_dir%\log.txt"
-
-:: Secondary acquisition of volatile data
-:magnetchoice
-if "%default_mode%"=="1" (set "c=N") else (
-    set "c="
-	set /P c=[32m Run Magnet Collection? [Y/N][E to End]? [0m
-	)
-if /I "%c%" EQU "Y" goto :magnet
-if /I "%c%" EQU "N" goto :ftkchoice
-if /I "%c%" EQU "E" goto :done
-
-:magnet
-cd /D %~dp0TOOLS\Vol_Acquisition\Magnet
-echo %date%-%time%: Started Magnet Response acquisition (please be patient as this is run silently)
-echo %date%-%time%: Started Magnet Response acquisition >> "%output_dir%\log.txt"
-start /wait MagnetRESPONSE.exe /accepteula /nodiagnosticdata /unattended /silent /output:"%output_dir%\magnet" /caseref:"" /capturevolatile /capturesystemfiles /captureransomnotes
-echo %date%-%time%: Completed Magnet Response acquisition 
-echo %date%-%time%: Completed Magnet Response acquisition >> "%output_dir%\log.txt"
 
 :: Acquire Logical Image of Drive
 :ftkchoice

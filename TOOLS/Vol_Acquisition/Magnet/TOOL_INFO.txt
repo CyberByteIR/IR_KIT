@@ -1,6 +1,0 @@
-Magnet RESPONSE
-Version: Latest
-Vendor: Magnet Forensics
-Download: https://www.magnetforensics.com/resources/magnet-response/
-License: Freeware (Registration Required)
-Description: Free incident response tool that captures volatile data, system files, and ransomware notes from Windows systems. Supports unattended/silent mode for scripted collection.

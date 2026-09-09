@@ -3,8 +3,8 @@
 **Author:** Jeremy Brice - Cyberbyte Consulting  
 **Contact:** forensics@cyberbyteconsulting.com  
 **Website:** https://cyberbyteconsulting.com  
-**Last Updated:** 2026-08-20  
-**Version:** v2.4.2  
+**Last Updated:** 2026-09-09  
+**Version:** v2.5.0  
 **License:** MIT (scripts only - see LICENSE)
 
 ---
@@ -39,8 +39,7 @@ IR_KIT/
     ├── Other_Tools/            # CamStudio, Hasher, MouseJiggle,
     │                             NotMyFault, ProcessHacker, Terminal
     └── Vol_Acquisition/        # AVML, CyberTriage, KAPE,
-                                  Magnet RESPONSE, UAC, WinPmem,
-                                  Get-ClipHistory.ps1
+                                  UAC, WinPmem, Get-ClipHistory.ps1
 ```
 
 ## Windows Collection Workflow (win_IR.bat)
@@ -51,8 +50,7 @@ The Windows script provides an interactive, menu-driven collection process:
 2. **Volatile Data Collection** - System info, network state, processes, services, scheduled tasks, user accounts, clipboard state and history, registry autoruns, VSS, disk info, BitLocker status, and encryption detection (EDD)
 3. **CyberTriage** - Automated host-based triage collection
 4. **KAPE** - Targeted artifact collection (KapeTriage + MemoryFiles); Modules not bundled — sync via `Get-KAPEUpdate.ps1` or `gkape.exe`
-5. **Magnet RESPONSE** - Volatile data, system files, and ransomware note capture
-6. **FTK Imager CLI** - Logical or physical disk imaging (E01 format)
+5. **FTK Imager CLI** - Logical or physical disk imaging (E01 format)
 
 Each step is optional and can be skipped or the script can be exited at any point.
 
