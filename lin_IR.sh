@@ -2,8 +2,8 @@
 
 # Linux Incident Response Script
 # By Jeremy Brice
-# forensics@cyberbyteir.com
-# Updated: 2026-05-26
+# dfir@cyberbyteir.com
+# Updated: 2026-10-30
 
 # Configuration Variables
 SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"

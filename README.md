@@ -1,10 +1,10 @@
 # IR_KIT - Incident Response Toolkit
 
 **Author:** Jeremy Brice - CyberByte  
-**Contact:** forensics@cyberbyteir.com  
+**Contact:** dfir@cyberbyteir.com  
 **Website:** https://CyberByteIR.com  
-**Last Updated:** 2026-09-09  
-**Version:** v2.5.1  
+**Last Updated:** 2026-10-30  
+**Version:** v2.6.0  
 **License:** MIT (scripts only - see LICENSE)
 
 ---
@@ -47,7 +47,7 @@ IR_KIT/
 The Windows script provides an interactive, menu-driven collection process:
 
 1. **Memory Acquisition** - Full physical memory dump via WinPmem
-2. **Volatile Data Collection** - System info, network state, processes, services, scheduled tasks, user accounts, clipboard state and history, registry autoruns, VSS, disk info, BitLocker status, and encryption detection (EDD)
+2. **Volatile Data Collection** - System info, network state, processes, services, scheduled tasks, user accounts and profiles, clipboard state and history, ASEPs (machine and per-user Run/RunOnce keys, Winlogon, Active Setup, Session Manager, Startup folders, IFEO and SilentProcessExit), services registry, VSS, disk info, BitLocker status, and encryption detection (EDD)
 3. **CyberTriage** - Automated host-based triage collection
 4. **KAPE** - Targeted artifact collection (KapeTriage + MemoryFiles); Modules not bundled — sync via `Get-KAPEUpdate.ps1` or `gkape.exe`
 5. **FTK Imager CLI** - Logical or physical disk imaging (E01 format)

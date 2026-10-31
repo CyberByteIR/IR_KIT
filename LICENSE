@@ -21,6 +21,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 DISCLAIMER: This license applies ONLY to the scripts authored by Jeremy Brice
-(win_IR.bat, lin_IR.sh, mac_IR.sh, poststander.bat, terminal.bat). Third-party
-tools included in the TOOLS directory are subject to their own respective
-licenses. See REQUIREMENTS.md for details on each tool and its licensing.
+(win_IR.bat, win_clip_history.bat, lin_IR.sh, mac_IR.sh, terminal.bat, and
+TOOLS/Vol_Acquisition/Get-ClipHistory.ps1). Third-party tools included in the
+TOOLS directory are subject to their own respective licenses. See
+REQUIREMENTS.md for details on each tool and its licensing.

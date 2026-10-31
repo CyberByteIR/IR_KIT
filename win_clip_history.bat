@@ -1,8 +1,8 @@
 :: Windows Clipboard History Collector (User Context)
 :: Companion to win_IR.bat - run separately in the subject user's session
 :: By Jeremy Brice
-:: forensics@cyberbyteir.com
-:: Updated: 2026-08-04
+:: dfir@cyberbyteir.com
+:: Updated: 2026-10-30
 
 @echo OFF
 setlocal enabledelayedexpansion

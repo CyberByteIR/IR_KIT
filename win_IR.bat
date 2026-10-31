@@ -1,7 +1,7 @@
 :: Windows Incident Response Script
 :: By Jeremy Brice
-:: forensics@cyberbyteir.com
-:: Updated: 2026-09-09
+:: dfir@cyberbyteir.com
+:: Updated: 2026-10-30
 
 @echo OFF
 
@@ -92,37 +92,58 @@ echo %date%-%time%: Started Volatile Data acquisition >> "%output_dir%\log.txt"
 
  echo Collecting services
  sc queryex >> "%output_dir%\vol_data\services.txt"
+ reg query HKLM\System\CurrentControlSet\Services /s >> "%output_dir%\vol_data\services_reg.txt"
 
  echo Collecting scheduled tasks
  schtasks /query >> "%output_dir%\vol_data\schTasks.txt"
  schtasks /query /fo LIST /v >> "%output_dir%\vol_data\schTasks_v.txt"
+
+ echo Collecting ASEPs
+ for %%K in (
+     "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run"
+     "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce"
+     "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\Run"
+     "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run"
+     "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\RunOnce"
+     "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon"
+     "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows"
+     "HKLM\SOFTWARE\Microsoft\Active Setup\Installed Components"
+ ) do reg query %%K /s >> "%output_dir%\vol_data\ASEPs.txt"
+ reg query "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager" >> "%output_dir%\vol_data\ASEPs.txt"
+ for /f "delims=" %%S in ('reg query HKU ^| findstr /R "S-1-5-21-[0-9-]*$"') do (
+     for %%R in (Run RunOnce) do (
+         echo ==== %%S\Software\Microsoft\Windows\CurrentVersion\%%R ====
+         reg query "%%S\Software\Microsoft\Windows\CurrentVersion\%%R"
+     )
+ ) >> "%output_dir%\vol_data\ASEPs.txt"
+ dir /a /t:c "%ProgramData%\Microsoft\Windows\Start Menu\Programs\StartUp" >> "%output_dir%\vol_data\ASEPs_startup_folders.txt"
+ for /D %%U in ("%SystemDrive%\Users\*") do dir /a /t:c "%%~fU\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup" >> "%output_dir%\vol_data\ASEPs_startup_folders.txt"
+ reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options" /s /v Debugger >> "%output_dir%\vol_data\ASEPs_ifeo.txt"
+ reg query "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows NT\CurrentVersion\Image File Execution Options" /s /v Debugger >> "%output_dir%\vol_data\ASEPs_ifeo.txt"
+ reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SilentProcessExit" /s >> "%output_dir%\vol_data\ASEPs_ifeo.txt"
 
  echo Collecting user information
  query user >> "%output_dir%\vol_data\users_loggedon.txt"
  net user >> "%output_dir%\vol_data\users.txt"
  net localgroup administrators >> "%output_dir%\vol_data\users_admins.txt"
  powershell -Command "Get-WmiObject Win32_UserAccount -filter LocalAccount=True" >> "%output_dir%\vol_data\users_all.txt"
- 
+ reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList" /s /v ProfileImagePath >> "%output_dir%\vol_data\users_profiles.txt"
+
  echo Collecting clipboard history
- 
-reg query "HKCU\Software\Microsoft\Clipboard" >> "%output_dir%\vol_data\clipboard_settings.txt"
-tasklist /svc /fi "imagename eq svchost.exe" | findstr /i cbdhsvc >> "%output_dir%\vol_data\clipboard_cbdhsvc_pid.txt"
-for /D %%U in ("%SystemDrive%\Users\*") do (
+ reg query "HKCU\Software\Microsoft\Clipboard" >> "%output_dir%\vol_data\clipboard_settings.txt"
+ tasklist /svc /fi "imagename eq svchost.exe" | findstr /i cbdhsvc >> "%output_dir%\vol_data\clipboard_cbdhsvc_pid.txt"
+ for /D %%U in ("%SystemDrive%\Users\*") do (
      if exist "%%~fU\AppData\Local\Microsoft\Windows\Clipboard" (
          robocopy "%%~fU\AppData\Local\Microsoft\Windows\Clipboard" "%output_dir%\vol_data\clipboard_pinned\%%~nxU" /E /COPY:DAT /R:0 /W:0 /NFL /NDL /NJH /NJS >nul 2>&1
      )
  )
-powershell -NoProfile -ExecutionPolicy Bypass -STA -File "%~dp0TOOLS\Vol_Acquisition\Get-ClipHistory.ps1" -OutputDir "%output_dir%\vol_data\" >> "%output_dir%\vol_data\clipboard_collection_log.txt"
+ powershell -NoProfile -ExecutionPolicy Bypass -STA -File "%~dp0TOOLS\Vol_Acquisition\Get-ClipHistory.ps1" -OutputDir "%output_dir%\vol_data\" >> "%output_dir%\vol_data\clipboard_collection_log.txt"
  if errorlevel 1 (
      echo   [33m Clipboard history NOT retrieved - see clipboard_collection_log.txt [0m
      echo %date%-%time%: Clipboard history retrieval FAILED - see vol_data\clipboard_collection_log.txt >> "%output_dir%\log.txt"
  ) else (
      echo %date%-%time%: Clipboard history retrieved >> "%output_dir%\log.txt"
  )
- 
- echo Collecting registry information
- reg query HKLM\Software\Microsoft\Windows\CurrentVersion\Run >> "%output_dir%\vol_data\reg_autoruns.txt"
- reg query HKLM\System\CurrentControlSet\Services >> "%output_dir%\vol_data\reg_services.txt"
 
  echo Collecting volume shadow copies
  vssadmin list shadows >> "%output_dir%\vol_data\VSS.txt"
