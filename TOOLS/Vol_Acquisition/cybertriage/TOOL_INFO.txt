@@ -1,6 +1,6 @@
 CyberTriage Collector
 Version: 4.0
-Vendor: Basis Technology / CyberTriage
+Vendor: Sleuth Kit Labs
 Download: https://www.cybertriage.com/download/
 License: Commercial (Free Lite Version Available)
 Description: Automated host-based incident response triage tool. The collector gathers forensic artifacts and can be used standalone or with the full CyberTriage platform for analysis.
