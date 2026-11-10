@@ -19,7 +19,7 @@ This document lists all third-party tools used by the IR_KIT scripts. These tool
 
 > **Note:** KAPE Modules are not bundled with this toolkit. After placing KAPE in `TOOLS/Vol_Acquisition/KAPE/`, sync Modules by running `Get-KAPEUpdate.ps1` or using `gkape.exe`.
 
-| CyberTriage Collector | Latest | Windows | https://www.cybertriage.com/download/ | Commercial (Free Lite Version Available) |
+| CyberTriage Collector | 4.0 | Windows | https://www.cybertriage.com/download/ | Commercial (Free Lite Version Available) |
 | UAC (Unix-like Artifacts Collector) | Latest | Linux, macOS | https://github.com/tclahr/uac | Apache 2.0 |
 
 ## Filesystem Acquisition

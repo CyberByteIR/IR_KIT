@@ -3,8 +3,8 @@
 **Author:** Jeremy Brice - CyberByte  
 **Contact:** dfir@cyberbyteir.com  
 **Website:** https://CyberByteIR.com  
-**Last Updated:** 2026-10-30  
-**Version:** v2.6.0  
+**Last Updated:** 2026-11-10  
+**Version:** v2.6.1  
 **License:** MIT (scripts only - see LICENSE)
 
 ---

@@ -1,5 +1,5 @@
 CyberTriage Collector
-Version: Latest
+Version: 4.0
 Vendor: Basis Technology / CyberTriage
 Download: https://www.cybertriage.com/download/
 License: Commercial (Free Lite Version Available)
