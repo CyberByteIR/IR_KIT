@@ -3,8 +3,8 @@
 **Author:** Jeremy Brice - CyberByte  
 **Contact:** dfir@cyberbyteir.com  
 **Website:** https://CyberByteIR.com  
-**Last Updated:** 2026-11-10  
-**Version:** v2.6.1  
+**Last Updated:** 2026-11-12  
+**Version:** v2.7.0  
 **License:** MIT (scripts only - see LICENSE)
 
 ---
@@ -36,8 +36,8 @@ IR_KIT/
     ├── Encryption/             # Encrypted Disk Detector (EDD)
     ├── FS_Acquisition/         # FTK Imager (GUI + CLI), Fuji
     ├── Live_Triage/            # osTriage
-    ├── Other_Tools/            # CamStudio, Hasher, MouseJiggle,
-    │                             NotMyFault, ProcessHacker, Terminal
+    ├── Other_Tools/            # CamStudio, HashMyFiles, MouseJiggle,
+    │                             NotMyFault, SystemInformer, Terminal
     └── Vol_Acquisition/        # AVML, CyberTriage, KAPE,
                                   UAC, WinPmem, Get-ClipHistory.ps1
 ```

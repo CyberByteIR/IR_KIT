@@ -1,6 +1,0 @@
-Process Hacker
-Version: Latest
-Vendor: Process Hacker Team
-Download: https://processhacker.sourceforge.io/
-License: GPL v3
-Description: Advanced system monitoring tool and task manager. Provides detailed process, service, and network connection information useful for live triage during incident response.

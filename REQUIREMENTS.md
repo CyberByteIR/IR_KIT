@@ -47,10 +47,10 @@ This document lists all third-party tools used by the IR_KIT scripts. These tool
 |------|---------|----------|----------|---------|
 | Windows Terminal (Portable) | Latest | Windows | https://github.com/microsoft/terminal/releases | MIT |
 | CamStudio Portable | Latest | Windows | https://camstudio.org/ | GPL v2 |
-| Hasher | 1.9.0 | Windows | https://www.yourdownloads.org/hasher/ | Freeware |
+| HashMyFiles | 2.50 | Windows | https://www.nirsoft.net/utils/hash_my_files.html | Freeware |
 | Mouse Jiggle | Latest | Windows | https://github.com/cerebrate/mousejiggle/releases | MS-PL |
 | NotMyFault | Latest | Windows | https://learn.microsoft.com/en-us/sysinternals/downloads/notmyfault | Sysinternals EULA |
-| Process Hacker | Latest | Windows | https://processhacker.sourceforge.io/ | GPL v3 |
+| System Informer | 4.0 | Windows | https://systeminformer.com/ | MIT |
 
 ---
 
@@ -70,9 +70,9 @@ This document lists all third-party tools used by the IR_KIT scripts. These tool
    - `TOOLS/Encryption/` - EDD
    - `TOOLS/Other_Tools/Terminal/` - Windows Terminal
    - `TOOLS/Other_Tools/Camstudio/` - CamStudio
-   - `TOOLS/Other_Tools/Hasher/` - Hasher
+   - `TOOLS/Other_Tools/HashMyFiles/` - HashMyFiles
    - `TOOLS/Other_Tools/MouseJiggle.exe` - Mouse Jiggle (place executable directly in Other_Tools/)
    - `TOOLS/Other_Tools/NotMyFault/` - NotMyFault
-   - `TOOLS/Other_Tools/ProcessHacker/` - Process Hacker
+   - `TOOLS/Other_Tools/SystemInformer/` - System Informer
 
 3. Some tools require registration or license keys before download. Plan accordingly.

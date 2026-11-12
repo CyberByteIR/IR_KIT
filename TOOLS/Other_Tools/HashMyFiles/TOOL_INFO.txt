@@ -1,0 +1,6 @@
+HashMyFiles
+Version: 2.50
+Vendor: NirSoft
+Download: https://www.nirsoft.net/utils/hash_my_files.html
+License: Freeware
+Description: File hashing utility for computing and verifying MD5, SHA-1, SHA-256, SHA-512 and CRC32 hash values for forensic integrity verification.

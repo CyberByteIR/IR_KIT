@@ -1,0 +1,6 @@
+System Informer
+Version: 4.0
+Vendor: Winsider Seminars & Solutions, Inc.
+Download: https://systeminformer.com/
+License: MIT
+Description: Advanced system monitoring tool and task manager (successor to Process Hacker). Provides detailed process, service, and network connection information useful for live triage during incident response.

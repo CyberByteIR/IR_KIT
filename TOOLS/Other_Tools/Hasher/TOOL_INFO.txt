@@ -1,6 +1,0 @@
-Hasher
-Version: 1.9.0
-Vendor: Community Tool
-Download: https://www.yourdownloads.org/hasher/
-License: Freeware
-Description: File hashing utility for computing and verifying MD5, SHA-1, SHA-256 and other hash values for forensic integrity verification.
