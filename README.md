@@ -4,7 +4,7 @@
 **Contact:** dfir@cyberbyteir.com  
 **Website:** https://CyberByteIR.com  
 **Last Updated:** 2026-11-12  
-**Version:** v2.7.0  
+**Version:** v2.8.0  
 **License:** MIT (scripts only - see LICENSE)
 
 ---
@@ -47,12 +47,16 @@ IR_KIT/
 The Windows script provides an interactive, menu-driven collection process:
 
 1. **Memory Acquisition** - Full physical memory dump via WinPmem
-2. **Volatile Data Collection** - System info, network state, processes, services, scheduled tasks, user accounts and profiles, clipboard state and history, ASEPs (machine and per-user Run/RunOnce keys, Winlogon, Active Setup, Session Manager, Startup folders, IFEO and SilentProcessExit), services registry, VSS, disk info, BitLocker status, and encryption detection (EDD)
+2. **Volatile Data Collection** - DNS cache (collected first), system info and time-service state, PowerShell history for every user profile, network state (connections, firewall, Wi-Fi, shares, inbound SMB sessions, mapped drives of the running session and of every logged-on user), processes, services, scheduled tasks, user accounts and profiles, clipboard state and history, ASEPs (machine and per-user Run/RunOnce keys, Winlogon, Active Setup, Session Manager, Startup folders, IFEO and SilentProcessExit), services registry, VSS, disk info, BitLocker status, and encryption detection (EDD)
 3. **CyberTriage** - Automated host-based triage collection
 4. **KAPE** - Targeted artifact collection (KapeTriage + MemoryFiles); Modules not bundled — sync via `Get-KAPEUpdate.ps1` or `gkape.exe`
 5. **FTK Imager CLI** - Logical or physical disk imaging (E01 format)
 
-Each step is optional and can be skipped or the script can be exited at any point.
+Each step is optional and can be skipped or the script can be exited at any point. Every choice — run, declined, Default mode, or ended — is recorded in `log.txt`. A blank or invalid answer re-prompts instead of starting the step, and the output drive must be a single existing drive letter.
+
+A tool that is missing from `TOOLS/` is logged as `SKIPPED` and the script moves on. Each tool's result is judged on its exit code and on the output it actually wrote. Encrypted Disk Detector results are logged as a `NOTICE` when encryption is reported.
+
+`win_IR.bat` uses Windows PowerShell for the UTC timestamps, the clock and time-zone header, and a few collectors (TCP connections, local accounts, external IP, clipboard history). Without PowerShell the script still runs from an elevated prompt: timestamps fall back to the local `cmd` clock and the affected items are logged as warnings.
 
 ## Clipboard History (win_clip_history.bat)
 
@@ -75,11 +79,16 @@ Requires Windows 10 1809+ and Windows PowerShell 5.1 (PowerShell 7 cannot projec
 2. Memory acquisition via AVML
 3. Artifact collection via UAC (profile: ir_triage)
 
+A missing or failed tool is logged and the remaining steps still run. The script exits non-zero if any step failed or was skipped.
+
 ## macOS Collection Workflow (mac_IR.sh)
 
-1. System information collection
-2. Artifact collection via UAC (profile: ir_triage)
-3. Filesystem acquisition via Fuji (GUI — launched manually)
+1. Full Disk Access check — warns and pauses if the terminal application cannot read TCC-protected data
+2. System information collection
+3. Artifact collection via UAC (profile: ir_triage)
+4. Filesystem acquisition via Fuji (GUI — the disk image is opened, the acquisition is run manually)
+
+A missing or failed tool is logged and the remaining steps still run. The script exits non-zero if any step failed or was skipped.
 
 ## Usage
 
@@ -108,7 +117,19 @@ sudo ./mac_IR.sh
 
 ## Output
 
-All collected data is saved to `<drive>:\<HOSTNAME>\` (Windows) or `<script_dir>/<hostname>/` (Linux/macOS), with a timestamped `log.txt` tracking each collection phase.
+All collected data is saved to `<drive>:\<HOSTNAME>\` (Windows) or `<script_dir>/<hostname>/` (Linux/macOS), with a `log.txt` tracking each collection phase.
+
+`log.txt` opens with a header recorded before anything is collected: hostname, script path, running account, console user (Windows, macOS), system clock in UTC and local time, time zone and UTC offset, and last boot. Compare that clock with a trusted time source and note any offset. Every entry after the header is stamped per event in ISO-8601 UTC.
+
+| Entry prefix | Meaning |
+|---|---|
+| `FAILED` | A step produced no output, or a tool returned an error |
+| `WARNING` | A collector returned a non-zero exit code, or output needs verifying; the named file holds the detail |
+| `SKIPPED` | A tool was not found in `TOOLS/` |
+| `NOTICE` | A finding, not a collection problem (Windows: encryption reported by EDD) |
+| `Operator …` | A choice made at a prompt (Windows) |
+
+The final entry gives the number of `FAILED`, `WARNING` and `SKIPPED` entries. Collector error output is kept in each output file.
 
 ## Prerequisites
 
@@ -118,6 +139,9 @@ All third-party tools must be downloaded separately and placed in the appropriat
 
 - Always run with elevated privileges (Administrator / root) — the sole exception is `win_clip_history.bat`, which must run as the subject user
 - Deploy from a dedicated USB drive when possible
+- When `win_IR.bat` is elevated with a different account than the logged-on user, per-user items (environment variables, `net use`, clipboard history) reflect the elevating account; the log header warns when this happens
+- macOS: grant Full Disk Access to the terminal application before running `mac_IR.sh`
+- Windows output includes BitLocker recovery passwords (`vol_data\bde-protectors.txt`); protect the output folder accordingly
 - The scripts in this repository are licensed under MIT; the third-party tools in `TOOLS/` are subject to their own respective licenses
 - Verify tool versions and update regularly
 - Test in your environment before deploying to live incidents
